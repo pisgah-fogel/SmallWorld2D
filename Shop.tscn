@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://gfx_src/world.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 72.5, 65.9071 )
+
+[node name="Shop" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -4.24969, -59.481 )
+scale = Vector2( 1.00944, 1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 304.074, 300, 195.926, 200 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4.83258, -44.9819 )
+shape = SubResource( 1 )

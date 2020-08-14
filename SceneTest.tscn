@@ -1,0 +1,278 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://House.tscn" type="PackedScene" id=2]
+[ext_resource path="res://FarmingArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://NPC.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SceneTest.gd" type="Script" id=5]
+[ext_resource path="res://FishSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://save/GameSaver.tscn" type="PackedScene" id=7]
+[ext_resource path="res://gfx_src/world.png" type="Texture" id=8]
+[ext_resource path="res://Bin.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Chest.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Shop.tscn" type="PackedScene" id=11]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+
+[sub_resource type="TileSet" id=3]
+35/name = "world.svg 35"
+35/texture = ExtResource( 8 )
+35/tex_offset = Vector2( 0, 0 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 0, 100, 100, 100 )
+35/tile_mode = 1
+35/autotile/bitmask_mode = 0
+35/autotile/bitmask_flags = [  ]
+35/autotile/icon_coordinate = Vector2( 0, 0 )
+35/autotile/tile_size = Vector2( 100, 100 )
+35/autotile/spacing = 0
+35/autotile/occluder_map = [  ]
+35/autotile/navpoly_map = [  ]
+35/autotile/priority_map = [  ]
+35/autotile/z_index_map = [  ]
+35/occluder_offset = Vector2( 0, 0 )
+35/navigation_offset = Vector2( 0, 0 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape_one_way = false
+35/shape_one_way_margin = 0.0
+35/shapes = [  ]
+35/z_index = 0
+37/name = "world.svg 37"
+37/texture = ExtResource( 8 )
+37/tex_offset = Vector2( 0, 0 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 100, 300, 100, 100 )
+37/tile_mode = 0
+37/occluder_offset = Vector2( 0, 0 )
+37/navigation_offset = Vector2( 0, 0 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape_one_way = false
+37/shape_one_way_margin = 0.0
+37/shapes = [  ]
+37/z_index = 0
+39/name = "world.svg 39"
+39/texture = ExtResource( 8 )
+39/tex_offset = Vector2( 0, 0 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 100, 100, 100, 100 )
+39/tile_mode = 0
+39/occluder_offset = Vector2( 0, 0 )
+39/navigation_offset = Vector2( 0, 0 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape = SubResource( 1 )
+39/shape_one_way = false
+39/shape_one_way_margin = 1.0
+39/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+39/z_index = 0
+40/name = "world.svg 40"
+40/texture = ExtResource( 8 )
+40/tex_offset = Vector2( 0, 0 )
+40/modulate = Color( 1, 1, 1, 1 )
+40/region = Rect2( 200, 300, 100, 100 )
+40/tile_mode = 0
+40/occluder_offset = Vector2( 0, 0 )
+40/navigation_offset = Vector2( 0, 0 )
+40/shape_offset = Vector2( 0, 0 )
+40/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+40/shape = SubResource( 2 )
+40/shape_one_way = false
+40/shape_one_way_margin = 1.0
+40/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+40/z_index = 0
+41/name = "world.svg 41"
+41/texture = ExtResource( 8 )
+41/tex_offset = Vector2( 0, 0 )
+41/modulate = Color( 1, 1, 1, 1 )
+41/region = Rect2( 0, 0, 100, 100 )
+41/tile_mode = 0
+41/occluder_offset = Vector2( 0, 0 )
+41/navigation_offset = Vector2( 0, 0 )
+41/shape_offset = Vector2( 0, 0 )
+41/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+41/shape_one_way = false
+41/shape_one_way_margin = 0.0
+41/shapes = [  ]
+41/z_index = 0
+42/name = "world.svg 42"
+42/texture = ExtResource( 8 )
+42/tex_offset = Vector2( 0, 0 )
+42/modulate = Color( 1, 1, 1, 1 )
+42/region = Rect2( 100, 0, 100, 100 )
+42/tile_mode = 0
+42/occluder_offset = Vector2( 0, 0 )
+42/navigation_offset = Vector2( 0, 0 )
+42/shape_offset = Vector2( 0, 0 )
+42/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+42/shape_one_way = false
+42/shape_one_way_margin = 0.0
+42/shapes = [  ]
+42/z_index = 0
+43/name = "world.svg 43"
+43/texture = ExtResource( 8 )
+43/tex_offset = Vector2( 0, 0 )
+43/modulate = Color( 1, 1, 1, 1 )
+43/region = Rect2( 200, 0, 100, 100 )
+43/tile_mode = 0
+43/occluder_offset = Vector2( 0, 0 )
+43/navigation_offset = Vector2( 0, 0 )
+43/shape_offset = Vector2( 0, 0 )
+43/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+43/shape_one_way = false
+43/shape_one_way_margin = 0.0
+43/shapes = [  ]
+43/z_index = 0
+44/name = "world.svg 44"
+44/texture = ExtResource( 8 )
+44/tex_offset = Vector2( 0, 0 )
+44/modulate = Color( 1, 1, 1, 1 )
+44/region = Rect2( 200, 100, 100, 100 )
+44/tile_mode = 0
+44/occluder_offset = Vector2( 0, 0 )
+44/navigation_offset = Vector2( 0, 0 )
+44/shape_offset = Vector2( 0, 0 )
+44/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+44/shape_one_way = false
+44/shape_one_way_margin = 0.0
+44/shapes = [  ]
+44/z_index = 0
+45/name = "world.svg 45"
+45/texture = ExtResource( 8 )
+45/tex_offset = Vector2( 0, 0 )
+45/modulate = Color( 1, 1, 1, 1 )
+45/region = Rect2( 200, 200, 100, 100 )
+45/tile_mode = 0
+45/occluder_offset = Vector2( 0, 0 )
+45/navigation_offset = Vector2( 0, 0 )
+45/shape_offset = Vector2( 0, 0 )
+45/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+45/shape_one_way = false
+45/shape_one_way_margin = 0.0
+45/shapes = [  ]
+45/z_index = 0
+46/name = "world.svg 46"
+46/texture = ExtResource( 8 )
+46/tex_offset = Vector2( 0, 0 )
+46/modulate = Color( 1, 1, 1, 1 )
+46/region = Rect2( 100, 200, 100, 100 )
+46/tile_mode = 0
+46/occluder_offset = Vector2( 0, 0 )
+46/navigation_offset = Vector2( 0, 0 )
+46/shape_offset = Vector2( 0, 0 )
+46/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+46/shape_one_way = false
+46/shape_one_way_margin = 0.0
+46/shapes = [  ]
+46/z_index = 0
+47/name = "world.svg 47"
+47/texture = ExtResource( 8 )
+47/tex_offset = Vector2( 0, 0 )
+47/modulate = Color( 1, 1, 1, 1 )
+47/region = Rect2( 0, 100, 100, 100 )
+47/tile_mode = 0
+47/occluder_offset = Vector2( 0, 0 )
+47/navigation_offset = Vector2( 0, 0 )
+47/shape_offset = Vector2( 0, 0 )
+47/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+47/shape_one_way = false
+47/shape_one_way_margin = 0.0
+47/shapes = [  ]
+47/z_index = 0
+48/name = "world.svg 48"
+48/texture = ExtResource( 8 )
+48/tex_offset = Vector2( 0, 0 )
+48/modulate = Color( 1, 1, 1, 1 )
+48/region = Rect2( 0, 200, 100, 100 )
+48/tile_mode = 0
+48/occluder_offset = Vector2( 0, 0 )
+48/navigation_offset = Vector2( 0, 0 )
+48/shape_offset = Vector2( 0, 0 )
+48/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+48/shape_one_way = false
+48/shape_one_way_margin = 0.0
+48/shapes = [  ]
+48/z_index = 0
+49/name = "world.png 49"
+49/texture = ExtResource( 8 )
+49/tex_offset = Vector2( 0, 0 )
+49/modulate = Color( 1, 1, 1, 1 )
+49/region = Rect2( 0, 300, 100, 100 )
+49/tile_mode = 0
+49/occluder_offset = Vector2( 0, 0 )
+49/navigation_offset = Vector2( 0, 0 )
+49/shape_offset = Vector2( 0, 0 )
+49/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+49/shape_one_way = false
+49/shape_one_way_margin = 0.0
+49/shapes = [  ]
+49/z_index = 0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="GameSaver" parent="." instance=ExtResource( 7 )]
+
+[node name="Ground" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+cell_size = Vector2( 100, 100 )
+cell_quadrant_size = 1
+cell_y_sort = true
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -65539, 38, 0, -65538, 49, 0, -65537, 49, 0, -131072, 49, 0, -131071, 49, 0, -131070, 49, 0, -131069, 49, 0, -131068, 49, 0, -131067, 49, 0, -131066, 49, 0, -131065, 49, 0, -131064, 49, 0, -131063, 49, 0, -131062, 49, 0, -131061, 49, 0, -131060, 49, 0, -131059, 49, 0, -131058, 49, 0, -131057, 49, 0, -131056, 38, 0, -3, 38, 0, -2, 40, 0, -1, 40, 0, -65536, 40, 0, -65535, 40, 0, -65534, 40, 0, -65533, 40, 0, -65532, 40, 0, -65531, 40, 0, -65530, 40, 0, -65529, 40, 0, -65528, 40, 0, -65527, 40, 0, -65526, 40, 0, -65525, 40, 0, -65524, 40, 0, -65523, 40, 0, -65522, 40, 0, -65521, 40, 0, -65520, 38, 0, 65533, 38, 0, 65534, 40, 0, 65535, 37, 0, 0, 37, 0, 1, 37, 0, 2, 37, 0, 3, 37, 0, 4, 37, 0, 5, 37, 0, 6, 37, 0, 7, 49, 0, 8, 37, 0, 9, 37, 0, 10, 37, 0, 11, 37, 0, 12, 37, 0, 13, 37, 0, 14, 37, 0, 15, 40, 0, 16, 38, 0, 131069, 38, 0, 131070, 40, 0, 131071, 37, 0, 65536, 37, 0, 65537, 37, 0, 65538, 49, 0, 65539, 37, 0, 65540, 37, 0, 65541, 37, 0, 65542, 37, 0, 65543, 37, 0, 65544, 37, 0, 65545, 37, 0, 65546, 37, 0, 65547, 37, 0, 65548, 37, 0, 65549, 37, 0, 65550, 37, 0, 65551, 40, 0, 65552, 38, 0, 196605, 38, 0, 196606, 40, 0, 196607, 41, 0, 131072, 42, 0, 131073, 42, 0, 131074, 42, 0, 131075, 42, 0, 131076, 42, 0, 131077, 42, 0, 131078, 42, 0, 131079, 42, 0, 131080, 42, 0, 131081, 42, 0, 131082, 42, 0, 131083, 42, 0, 131084, 42, 0, 131085, 42, 0, 131086, 43, 0, 131087, 40, 0, 131088, 38, 0, 262141, 38, 0, 262142, 40, 0, 262143, 35, 0, 196608, 39, 0, 196609, 39, 0, 196610, 39, 0, 196611, 39, 0, 196612, 39, 0, 196613, 39, 0, 196614, 39, 0, 196615, 39, 0, 196616, 39, 0, 196617, 39, 0, 196618, 39, 0, 196619, 39, 0, 196620, 39, 0, 196621, 39, 0, 196622, 44, 0, 196623, 40, 0, 196624, 38, 0, 327677, 38, 0, 327678, 40, 0, 327679, 35, 0, 262144, 39, 0, 262145, 39, 0, 262146, 39, 0, 262147, 39, 0, 262148, 39, 0, 262149, 39, 0, 262150, 39, 0, 262151, 39, 0, 262152, 39, 0, 262153, 39, 0, 262154, 39, 0, 262155, 39, 0, 262156, 39, 0, 262157, 39, 0, 262158, 44, 0, 262159, 40, 0, 262160, 38, 0, 393213, 38, 0, 393214, 40, 0, 393215, 47, 0, 327680, 39, 0, 327681, 39, 0, 327682, 39, 0, 327683, 39, 0, 327684, 39, 0, 327685, 39, 0, 327686, 39, 0, 327687, 39, 0, 327688, 39, 0, 327689, 39, 0, 327690, 39, 0, 327691, 39, 0, 327692, 39, 0, 327693, 39, 0, 327694, 44, 0, 327695, 40, 0, 327696, 38, 0, 458749, 38, 0, 458750, 40, 0, 458751, 48, 0, 393216, 46, 0, 393217, 46, 0, 393218, 46, 0, 393219, 46, 0, 393220, 46, 0, 393221, 46, 0, 393222, 46, 0, 393223, 46, 0, 393224, 46, 0, 393225, 46, 0, 393226, 46, 0, 393227, 46, 0, 393228, 46, 0, 393229, 46, 0, 393230, 45, 0, 393231, 40, 0, 393232, 38, 0, 524285, 38, 0, 524286, 40, 0, 524287, 37, 0, 458752, 37, 0, 458753, 37, 0, 458754, 37, 0, 458755, 37, 0, 458756, 37, 0, 458757, 37, 0, 458758, 37, 0, 458759, 37, 0, 458760, 37, 0, 458761, 37, 0, 458762, 37, 0, 458763, 37, 0, 458764, 37, 0, 458765, 37, 0, 458766, 37, 0, 458767, 40, 0, 458768, 38, 0, 589821, 38, 0, 589822, 40, 0, 589823, 37, 0, 524288, 37, 0, 524289, 37, 0, 524290, 37, 0, 524291, 37, 0, 524292, 37, 0, 524293, 37, 0, 524294, 37, 0, 524295, 37, 0, 524296, 37, 0, 524297, 37, 0, 524298, 37, 0, 524299, 37, 0, 524300, 37, 0, 524301, 37, 0, 524302, 37, 0, 524303, 40, 0, 524304, 38, 0, 655357, 38, 0, 655358, 40, 0, 655359, 37, 0, 589824, 37, 0, 589825, 37, 0, 589826, 37, 0, 589827, 37, 0, 589828, 37, 0, 589829, 37, 0, 589830, 37, 0, 589831, 37, 0, 589832, 37, 0, 589833, 37, 0, 589834, 37, 0, 589835, 37, 0, 589836, 37, 0, 589837, 37, 0, 589838, 37, 0, 589839, 40, 0, 589840, 38, 0, 720893, 38, 0, 720894, 40, 0, 720895, 37, 0, 655360, 37, 0, 655361, 37, 0, 655362, 37, 0, 655363, 37, 0, 655364, 37, 0, 655365, 37, 0, 655366, 37, 0, 655367, 37, 0, 655368, 37, 0, 655369, 37, 0, 655370, 37, 0, 655371, 37, 0, 655372, 37, 0, 655373, 37, 0, 655374, 37, 0, 655375, 40, 0, 655376, 38, 0, 786429, 38, 0, 786430, 40, 0, 786431, 40, 0, 720896, 40, 0, 720897, 40, 0, 720898, 40, 0, 720899, 40, 0, 720900, 40, 0, 720901, 40, 0, 720902, 40, 0, 720903, 40, 0, 720904, 40, 0, 720905, 40, 0, 720906, 40, 0, 720907, 40, 0, 720908, 40, 0, 720909, 40, 0, 720910, 40, 0, 720911, 40, 0, 720912, 38, 0, 851965, 38, 0, 851966, 38, 0, 851967, 38, 0, 786432, 38, 0, 786433, 38, 0, 786434, 38, 0, 786435, 38, 0, 786436, 38, 0, 786437, 38, 0, 786438, 38, 0, 786439, 38, 0, 786440, 38, 0, 786441, 38, 0, 786442, 38, 0, 786443, 38, 0, 786444, 38, 0, 786445, 38, 0, 786446, 38, 0, 786447, 38, 0, 786448, 38, 0 )
+
+[node name="FarmingArea3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 880, 224 )
+
+[node name="FarmingArea4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 736, 224 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="FishSpawner" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 0, 312 )
+spawner_zone = Rect2( 0, 0, 1300, 280 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 244.46, 79.5734 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+position = Vector2( -1.69728, -67.7194 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+
+[node name="House" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 520.723, 45.8509 )
+
+[node name="NPC" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 0, 96 )
+
+[node name="Bin" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 760, 48 )
+
+[node name="Chest" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 921, 46 )
+
+[node name="Shop" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 1117.57, 48.0833 )
+[connection signal="chestOpenned" from="YSort/Bin" to="YSort/Player" method="_on_chestOpenned"]
+[connection signal="chestOpenned" from="YSort/Chest" to="YSort/Player" method="_on_chestOpenned"]

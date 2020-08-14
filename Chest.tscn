@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gfx_src/world.png" type="Texture" id=1]
+[ext_resource path="res://Chest.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 48, 24 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 48, 24 )
+
+[node name="Chest" type="StaticBody2D" groups=[
+"save",
+]]
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 200, 500, 200, 100 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+collision_layer = 16
+collision_mask = 2147483648
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -8 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
