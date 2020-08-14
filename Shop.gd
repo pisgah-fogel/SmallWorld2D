@@ -22,6 +22,11 @@ var prices = [
 	5, # seed
 	5 # seed 
 	]
+	
+var userWallet = null
+func setUserWallet(wallet):
+	print("Shop::setUserWallet")
+	userWallet = wallet
 
 func getPrice(item_id:int):
 	if item_id >= 0 and item_id < prices.size():
@@ -33,17 +38,23 @@ const Item = preload('res://Item.gd')
 
 func _on_Area2D_body_entered(body):
 	body.get_parent()._on_chestOpenned(self)
+	# TODO: if userWAllter == null display something to tell the user...
 
 func closeChest():
-	pass
+	userWallet.money += total
+	mObjects.clear()
+	total = 0
 
 func setItem(index:int, object):
 	if index >= 0 and index < mObjects.size() and mObjects[index]!= null:
 		print("Removed from shop: ", mObjects[index].name, " (", getPrice(mObjects[index].id), ")")
 		total -= getPrice(mObjects[index].id)
+		# ToDO update display
+		# ToDo: add need items when we buy some
 	if index >= 0 and index < num_column*num_row and object != null:
 		print("Added to shop: ", object.name, " (", getPrice(object.id), ")")
 		total += getPrice(object.id)
+		# ToDo update display
 	print("Total: ", total)
 	
 	if index < 0:

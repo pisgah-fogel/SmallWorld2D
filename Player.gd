@@ -26,6 +26,11 @@ var bait_notInWater = false
 var newFish = null
 var mDirection = Direction.DOWN
 
+
+class Wallet:
+	var money:int = 0
+var mWallet = Wallet.new()
+
 func _ready():
 	animationPlayer = $AnimationPlayer
 	animationPlayer.play("idle_down")
@@ -230,6 +235,10 @@ func open_inventory(chest):
 	state = INVENTORY
 	clear_null_inventory()
 	inventoryInstance = Inventory.instance()
+	if inventoryInstance.has_method("setUserWallet"):
+		inventoryInstance.setUserWallet(mWallet)
+	if chest and chest.has_method("setUserWallet"):
+		chest.setUserWallet(mWallet)
 	inventoryInstance.setInventoryList(objectList)
 	inventoryInstance.connect("newInventorySelection", self, "_inventorySelection")
 	inventoryInstance.chest = chest
@@ -238,6 +247,8 @@ func open_inventory(chest):
 func stop_inventory():
 	start_move()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	if inventoryInstance.chest != null:
+		inventoryInstance.chest.closeChest()
 	if inventoryInstance != null:
 		inventoryInstance.queue_free()
 
@@ -252,10 +263,12 @@ func _inventorySelection(itemSelection):
 func save(save_game: Resource):
 	save_game.data["character_position"] = global_position
 	save_game.data["character_objects"] = objectList
+	save_game.data["character_money"] = mWallet.money
 
 func load(save_game: Resource):
 	global_position = save_game.data["character_position"]
 	objectList = save_game.data["character_objects"]
+	mWallet.money = save_game.data["character_money"]
 
 ######################## UTILS ########################
 

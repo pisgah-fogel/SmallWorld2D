@@ -253,3 +253,11 @@ position = Vector2( 638.151, 452.612 )
 texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 90, 90 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 589.0
+margin_top = 247.0
+margin_right = 697.0
+margin_bottom = 298.0
+text = "0"
+scroll_active = false

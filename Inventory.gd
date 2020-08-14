@@ -1,8 +1,3 @@
-# TODO: delete items
-# TODO: Chest interaction
-# TODO: move items
-# TODO: add money
-# TODO market interaction
 extends Control
 
 export(int) var default_sel = 0
@@ -17,6 +12,7 @@ onready var mSelection = $selection
 onready var mItemMap = $ItemMap
 onready var mItemSprite = $ItemSprite
 onready var mTileMap = $TileMap
+onready var mRichTextLabel = $RichTextLabel
 
 var tileStart = Vector2(0, 0)
 var dragging = false
@@ -30,6 +26,13 @@ var hand_open = load("res://gfx_src/hand_open.svg")
 var hand_close = load("res://gfx_src/hand_close.svg")
 
 var chest = null setget setChest
+
+var userWallet = null
+func setUserWallet(wallet):
+	print("Inventory::setUserWallet")
+	userWallet = wallet
+	if mRichTextLabel != null:
+		mRichTextLabel.text = str(wallet.money)
 
 signal newInventorySelection(item)
 
@@ -93,6 +96,8 @@ func _ready():
 	move_sprite_on_sel(pos_sel)
 	update_items_sprites()
 	create_chest_background()
+	if userWallet != null:
+		mRichTextLabel.text = str(userWallet.money)
 
 func is_inside_inventory(ix, iy, object):
 	var minx = object.tileStart.x
