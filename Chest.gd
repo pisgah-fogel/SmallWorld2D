@@ -2,8 +2,6 @@ extends StaticBody2D
 
 onready var mSprite = $Sprite
 
-signal chestOpenned(chest)
-
 export var mObjects = []
 export var num_column = 3
 export var num_row = 1
@@ -14,13 +12,11 @@ var tileStart = Vector2(0, -2)
 const Item = preload('res://Item.gd')
 
 func _on_Area2D_body_entered(body):
-	print("Play opened a chest")
 	mSprite.frame = 1
-	emit_signal("chestOpenned", self)
+	body.get_parent()._on_chestOpenned(self)
 
 func closeChest():
 	mSprite.frame = 0
-	print("Chest closed")
 
 func setItem(index:int, object):
 	if index < 0:

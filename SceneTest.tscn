@@ -274,6 +274,3 @@ position = Vector2( 921, 46 )
 
 [node name="Shop" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 1117.57, 48.0833 )
-[connection signal="chestOpenned" from="YSort/Bin" to="YSort/Player" method="_on_chestOpenned"]
-[connection signal="chestOpenned" from="YSort/Chest" to="YSort/Player" method="_on_chestOpenned"]
-[connection signal="chestOpenned" from="YSort/Shop" to="YSort/Player" method="_on_chestOpenned"]
