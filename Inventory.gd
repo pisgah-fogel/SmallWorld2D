@@ -106,7 +106,7 @@ func is_inside_inventory(ix, iy, object):
 func start_drag_sprite(pos):
 	if dragging:
 		if originChest:
-			chest.mObjects[originalPos] = draggingObj
+			chest.setItem(originalPos,draggingObj)
 		else:
 			mObjects[originalPos] = draggingObj
 		dragging = false
@@ -152,7 +152,7 @@ func start_drag_sprite(pos):
 			update_drafting_sprite(pos_sel, chest) # TODO
 			mItemSprite.position = get_local_mouse_position() - Vector2(600, 500)
 			draggingObj = chest.mObjects[pos_sel]
-			chest.mObjects[pos_sel] = null
+			chest.setItem(originalPos,null)
 			update_items_sprites()
 	else:
 		dragging = false
@@ -178,13 +178,14 @@ func end_drag_sprite(pos):
 		# Switch with an other item
 		if pos_sel_bis < 0:
 			if originChest:
-				chest.mObjects[originalPos] = draggingObj
+				chest.setItem(originalPos, draggingObj)
 			else:
 				mObjects[originalPos] = draggingObj
+		# Switch item with an other one
 		elif pos_sel_bis < mObjects.size() and mObjects[pos_sel_bis] != null:
 			var buff = mObjects[pos_sel_bis]
 			if originChest:
-				chest.mObjects[originalPos] = buff
+				chest.setItem(originalPos, buff)
 			else:
 				mObjects[originalPos] = buff
 			mObjects[pos_sel_bis] = draggingObj
@@ -196,7 +197,7 @@ func end_drag_sprite(pos):
 			mObjects.append(draggingObj)
 		else:
 			if originChest:
-				chest.mObjects[originalPos] = draggingObj
+				chest.setItem(originalPos, draggingObj)
 			else:
 				mObjects[originalPos] = draggingObj
 	elif chest != null and is_inside_inventory(ix, iy, chest):
@@ -207,30 +208,30 @@ func end_drag_sprite(pos):
 			draggingObj = null
 		elif pos_sel_bis < 0:
 			if originChest:
-				chest.mObjects[originalPos] = draggingObj
+				chest.setItem(originalPos, draggingObj)
 			else:
 				mObjects[originalPos] = draggingObj
 		elif pos_sel_bis < chest.mObjects.size() and chest.mObjects[pos_sel_bis] != null:
 			var buff = chest.mObjects[pos_sel_bis]
 			if originChest:
-				chest.mObjects[originalPos] = buff
+				chest.setItem(originalPos, buff)
 			else:
 				mObjects[originalPos] = buff
-			chest.mObjects[pos_sel_bis] = draggingObj
+			chest.setItem(pos_sel_bis, draggingObj)
 		# remplace null item with this one
 		elif pos_sel_bis < chest.mObjects.size() and chest.mObjects[pos_sel_bis] == null:
-			chest.mObjects[pos_sel_bis] = draggingObj
+			chest.setItem(pos_sel_bis, draggingObj)
 		# Add at the end of the list
 		elif pos_sel_bis >= chest.mObjects.size() and pos_sel_bis < chest.num_column*chest.num_row: 
-			chest.mObjects.append(draggingObj)
+			chest.setItem(pos_sel_bis, draggingObj)
 		else:
 			if originChest:
-				chest.mObjects[originalPos] = draggingObj
+				chest.setItem(originalPos, draggingObj)
 			else:
 				mObjects[originalPos] = draggingObj
 	else:
 		if originChest:
-			chest.mObjects[originalPos] = draggingObj
+			chest.setItem(originalPos, draggingObj)
 		else:
 			mObjects[originalPos] = draggingObj
 	originalPos = 0

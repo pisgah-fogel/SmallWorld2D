@@ -17,3 +17,16 @@ func _on_Area2D_body_entered(body):
 
 func closeChest():
 	pass
+
+func setItem(index:int, object):
+	if index < 0:
+		return false
+	elif index < mObjects.size():
+		mObjects[index] = object
+		return true
+	elif index < num_column*num_row:
+		mObjects.append(object)
+		return true
+	else:
+		return false
+	

@@ -22,6 +22,18 @@ func closeChest():
 	mSprite.frame = 0
 	print("Chest closed")
 
+func setItem(index:int, object):
+	if index < 0:
+		return false
+	elif index < mObjects.size():
+		mObjects[index] = object
+		return true
+	elif index < num_column*num_row:
+		mObjects.append(object)
+		return true
+	else:
+		return false
+
 ##################### SAVING RESOURCES ########################
 
 func save(save_game: Resource):
