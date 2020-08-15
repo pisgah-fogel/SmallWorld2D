@@ -12,7 +12,7 @@ onready var mSelection = $selection
 onready var mItemMap = $ItemMap
 onready var mItemSprite = $ItemSprite
 onready var mTileMap = $TileMap
-onready var mRichTextLabel = $RichTextLabel
+onready var mGoldLabel = $GoldLabel
 
 var tileStart = Vector2(0, 0)
 var dragging = false
@@ -31,8 +31,8 @@ var userWallet = null
 func setUserWallet(wallet):
 	print("Inventory::setUserWallet")
 	userWallet = wallet
-	if mRichTextLabel != null:
-		mRichTextLabel.text = str(wallet.money)
+	if mGoldLabel != null:
+		mGoldLabel.text = str(wallet.money)
 
 signal newInventorySelection(item)
 
@@ -97,7 +97,7 @@ func _ready():
 	update_items_sprites()
 	create_chest_background()
 	if userWallet != null:
-		mRichTextLabel.text = str(userWallet.money)
+		mGoldLabel.text = str(userWallet.money)
 
 func is_inside_inventory(ix, iy, object):
 	var minx = object.tileStart.x
