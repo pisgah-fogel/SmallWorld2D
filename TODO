@@ -23,6 +23,13 @@
 - User 45 degrees animations (4 required)
 - User animations when have a collision
 - NPC can interract with shop and enter houses
+- Extend map: Change scenes
+- Enter Houses: Change scenes
+
+# Robustness
+- Handle full inventory (cf TODO tag in Player.gd)
+- Handle no character's Wallet
+- More robust way to check tiles for Water
 
 # To test
 - Bigger inventory/shops/bin/chest...
@@ -30,7 +37,17 @@
 
 # Long term
 - Market prices changes over time and resources availabilities
+- Order scripts and scenes in folders
 
 # Ideas:
 - Scrollable Chest ?
 - User's 22.5 degrees animations ? (8 required)
+- Fishes check for water before moving ? (move far from the spawn ?)
+- Character's animation when turning
+
+# To Do before 'shipping'
+- Make fishing more difficult
+- Redesign map
+- make plants grow slower
+- more randomness in plants and fishes timers
+- rare plants and fishes

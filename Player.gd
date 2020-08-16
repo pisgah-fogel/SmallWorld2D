@@ -119,7 +119,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 				open_inventory(null)
 		FISHING:
 			if bait_notInWater:
-				print("Bait not in water, stop fishing")
 				stop_fishing()
 			else:
 				if bait != null:
@@ -143,10 +142,9 @@ func stop_gotFish():
 			addObjectToInventory(newFish.mItem)
 		else:
 			print("Inventory is full")
-		# TODO handle full inventory
+			# TODO handle full inventory
 		newFish.queue_free()
 	newFish = null
-	print("Got a fish (or inventory full, stop fishing")
 	stop_fishing() #Free bait & start_move()
 
 func stop_fishing():
@@ -167,7 +165,6 @@ func _fishCatched(fish):
 	newFish.global_rotation = 0
 
 func _baitEaten(fish):
-	print("Bait eaten, stop fishing")
 	stop_fishing()
 
 func start_fishing():
@@ -188,7 +185,6 @@ func start_fishing():
 				animationPlayer.play("fishing_right")
 				tmp = get_parent().global_position + Vector2(200, 0.0)
 	if not get_parent().get_parent().is_water(tmp + global_position):
-		print("not in water: position: x:", global_position.x, " y:",global_position.y)
 		bait_notInWater = true
 	elif bait == null:
 		bait_notInWater = false
@@ -199,7 +195,6 @@ func start_fishing():
 
 func state_fishing(delta):
 	if bait_movement and bait != null:
-		# TODO check that the bait is not too close to the player
 		match mDirection:
 			Direction.DOWN:
 				bait.translate(Vector2(0, -100)*delta)
@@ -210,7 +205,6 @@ func state_fishing(delta):
 			Direction.RIGHT:
 				bait.translate(Vector2(-100, 0)*delta)
 		if not get_parent().get_parent().is_water(bait.global_position):
-			print("Tried go fishing on land")
 			stop_fishing()
 
 ############################  MOVING ######################
@@ -221,7 +215,6 @@ func start_move():
 
 func state_move(delta):
 	velocity = velocity.linear_interpolate(userControl.normalized() * speed * delta, 0.7)
-	# TODO add movement fluidity went switch from one direction to an other
 	var col_info = move_and_collide(velocity)
 	if velocity.length() < 0.1:
 		match mDirection:
@@ -234,8 +227,6 @@ func state_move(delta):
 			Direction.RIGHT:
 				animationPlayer.play("idle_right")
 	elif col_info:
-		# TODO: animation when have a collision
-		# TODO: animations when orientation = 45 degrees
 		if userControl.x > 0:
 			mDirection = Direction.RIGHT
 			animationPlayer.play("idle_right")

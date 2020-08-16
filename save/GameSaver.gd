@@ -4,7 +4,6 @@
 extends Node
 
 const SaveGame = preload('res://save/SaveGame.gd')
-# TODO: Use project setting to save to res://debug vs user://
 var SAVE_FOLDER: String = "user://save"
 var SAVE_NAME_TEMPLATE: String = "save_%03d.tres"
 

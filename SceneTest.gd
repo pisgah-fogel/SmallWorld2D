@@ -16,7 +16,4 @@ func _notification(what):
 func is_water(position):
 	var relative = (position - mGround.global_position)/mGround.scale
 	var tilep = relative / mGround.cell_size
-	print("Looking at tile: x:",tilep.x, " y:", tilep.y)
-	print("Tile type: ", mGround.get_cellv(tilep))
-	# TODO: find more robust way to do it
-	return mGround.get_cellv(tilep) == water_tile # 4 = Water
+	return mGround.get_cellv(tilep) == water_tile
