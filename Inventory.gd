@@ -5,7 +5,9 @@ var pos_sel = default_sel
 
 export(int) var num_column = 5
 export(int) var num_row = 2
-export(int) var chest_tile = 7
+export(int) var chest_tile = 12
+export(int) var shop_tile = 11
+export(int) var bin_tile = 22
 export(Vector2) var mouse_clicker =  Vector2(50, 40)
 export(Vector2) var mouse_offset = Vector2(0, 0)
 
@@ -32,7 +34,6 @@ var chest = null setget setChest
 
 var userWallet = null
 func setUserWallet(wallet):
-	print("Inventory::setUserWallet")
 	userWallet = wallet
 	if mGoldLabel != null:
 		mGoldLabel.text = str(wallet.money)
@@ -43,7 +44,12 @@ func create_chest_background():
 	if mTileMap and chest!=null:
 		for row in range(chest.num_row):
 			for col in range(chest.num_column):
-				mTileMap.set_cell(chest.tileStart.x + col, chest.tileStart.y + row, chest_tile)
+				var tt = chest_tile
+				if chest.get("isBin"):
+					tt = bin_tile
+				elif chest.get("isShop"):
+					tt = shop_tile
+				mTileMap.set_cell(chest.tileStart.x + col, chest.tileStart.y + row, tt)
 
 func setChest(newchest):
 	chest = newchest
@@ -214,7 +220,7 @@ func end_drag_sprite(pos):
 	elif chest != null and is_inside_inventory(ix, iy, chest):
 		var pos_sel_bis = (ix-chest.tileStart.x) + (iy-chest.tileStart.y-1)*chest.num_column
 		# Switch with an other item
-		if chest.isBin:
+		if chest.get("isBin"):
 			originalPos = 0
 			draggingObj = null
 		elif pos_sel_bis < 0:

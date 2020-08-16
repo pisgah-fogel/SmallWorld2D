@@ -53,6 +53,13 @@ var right_strength = 0.0
 var left_strength = 0.0
 var up_strength = 0.0
 var down_strength = 0.0
+func clearUserMovemnt():
+	velocity = Vector2.ZERO
+	right_strength = 0.0
+	left_strength = 0.0
+	up_strength = 0.0
+	down_strength = 0.0
+
 func updateUserControl(event):
 	if event.is_action_pressed("ui_right"):
 		right_strength = event.get_action_strength("ui_right")
@@ -168,7 +175,7 @@ func _baitEaten(fish):
 	stop_fishing()
 
 func start_fishing():
-	velocity = Vector2.ZERO
+	clearUserMovemnt()
 	var tmp = Vector2.ZERO
 	state = FISHING
 	match mDirection:
@@ -255,7 +262,7 @@ func state_move(delta):
 
 ####################### GETTING OBJECTS #######################
 func start_getObject():
-	velocity = Vector2.ZERO
+	clearUserMovemnt()
 	state = GET_OBJECT
 	animationPlayer.play("get_down")
 
@@ -263,11 +270,11 @@ func start_getObject():
 
 func start_inventory():
 	animationPlayer.play("inventory")
-	velocity = Vector2.ZERO
+	clearUserMovemnt()
 	state = INVENTORY
 
 func open_inventory(chest):
-	velocity = Vector2.ZERO
+	# TODO: handle collision error
 	state = INVENTORY
 	clear_null_inventory()
 	inventoryInstance = Inventory.instance()

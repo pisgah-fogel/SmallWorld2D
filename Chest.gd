@@ -5,7 +5,6 @@ onready var mSprite = $Sprite
 export var mObjects = []
 export var num_column = 3
 export var num_row = 1
-export(bool) var isBin = false
 
 var tileStart = Vector2(0, -2)
 
