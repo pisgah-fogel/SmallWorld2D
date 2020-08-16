@@ -49,6 +49,34 @@ func _physics_process(delta):
 		GOTFISH:
 			state_gotFish(delta)
 
+var right_strength = 0.0
+var left_strength = 0.0
+var up_strength = 0.0
+var down_strength = 0.0
+func updateUserControl(event):
+	if event.is_action_pressed("ui_right"):
+		right_strength = event.get_action_strength("ui_right")
+	elif event.is_action_released("ui_right"):
+		right_strength = 0.0
+	
+	if event.is_action_pressed("ui_left"):
+		left_strength = event.get_action_strength("ui_left")
+	elif event.is_action_released("ui_left"):
+		left_strength = 0.0
+	
+	if event.is_action_pressed("ui_down"):
+		down_strength = event.get_action_strength("ui_down")
+	elif event.is_action_released("ui_down"):
+		down_strength = 0.0
+	
+	if event.is_action_pressed("ui_up"):
+		up_strength = event.get_action_strength("ui_up")
+	elif event.is_action_released("ui_up"):
+		up_strength = 0.0
+	
+	userControl.x = right_strength - left_strength
+	userControl.y = down_strength - up_strength
+
 func _unhandled_key_input(event):
 	match state:
 		MOVE:
@@ -62,8 +90,7 @@ func _unhandled_key_input(event):
 				start_fishing()
 				return
 			else:
-				userControl.x = event.get_action_strength("ui_right") - event.get_action_strength("ui_left")
-				userControl.y = event.get_action_strength("ui_down") - event.get_action_strength("ui_up")
+				updateUserControl(event)
 		GET_OBJECT:
 			pass
 		INVENTORY:
@@ -92,6 +119,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 				open_inventory(null)
 		FISHING:
 			if bait_notInWater:
+				print("Bait not in water, stop fishing")
 				stop_fishing()
 			else:
 				if bait != null:
@@ -118,6 +146,7 @@ func stop_gotFish():
 		# TODO handle full inventory
 		newFish.queue_free()
 	newFish = null
+	print("Got a fish (or inventory full, stop fishing")
 	stop_fishing() #Free bait & start_move()
 
 func stop_fishing():
@@ -138,6 +167,7 @@ func _fishCatched(fish):
 	newFish.global_rotation = 0
 
 func _baitEaten(fish):
+	print("Bait eaten, stop fishing")
 	stop_fishing()
 
 func start_fishing():
@@ -158,6 +188,7 @@ func start_fishing():
 				animationPlayer.play("fishing_right")
 				tmp = get_parent().global_position + Vector2(200, 0.0)
 	if not get_parent().get_parent().is_water(tmp + global_position):
+		print("not in water: position: x:", global_position.x, " y:",global_position.y)
 		bait_notInWater = true
 	elif bait == null:
 		bait_notInWater = false
@@ -179,6 +210,7 @@ func state_fishing(delta):
 			Direction.RIGHT:
 				bait.translate(Vector2(-100, 0)*delta)
 		if not get_parent().get_parent().is_water(bait.global_position):
+			print("Tried go fishing on land")
 			stop_fishing()
 
 ############################  MOVING ######################
@@ -188,11 +220,10 @@ func start_move():
 	animationPlayer.play("idle_down")
 
 func state_move(delta):
-	velocity = userControl.normalized() * speed
-	velocity = velocity*delta
+	velocity = velocity.linear_interpolate(userControl.normalized() * speed * delta, 0.7)
 	# TODO add movement fluidity went switch from one direction to an other
 	var col_info = move_and_collide(velocity)
-	if col_info or velocity == Vector2.ZERO:
+	if velocity.length() < 0.1:
 		match mDirection:
 			Direction.DOWN:
 				animationPlayer.play("idle_down")
@@ -202,6 +233,21 @@ func state_move(delta):
 				animationPlayer.play("idle_left")
 			Direction.RIGHT:
 				animationPlayer.play("idle_right")
+	elif col_info:
+		# TODO: animation when have a collision
+		# TODO: animations when orientation = 45 degrees
+		if userControl.x > 0:
+			mDirection = Direction.RIGHT
+			animationPlayer.play("idle_right")
+		elif userControl.x < 0:
+			mDirection = Direction.LEFT
+			animationPlayer.play("idle_left")
+		elif userControl.y > 0:
+			mDirection = Direction.DOWN
+			animationPlayer.play("idle_down")
+		elif userControl.y < 0:
+			mDirection = Direction.UP
+			animationPlayer.play("idle_up")
 	else:
 		if userControl.x > 0:
 			mDirection = Direction.RIGHT
@@ -221,7 +267,6 @@ func start_getObject():
 	velocity = Vector2.ZERO
 	state = GET_OBJECT
 	animationPlayer.play("get_down")
-	velocity = Vector2.ZERO
 
 ########################## INVENTORY ############################
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://gfx_src/character.svg" type="Texture" id=1]
+[ext_resource path="res://gfx_src/character.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://right.tres" type="Animation" id=3]
 
@@ -237,12 +237,12 @@ collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -5, -4 )
-scale = Vector2( 1.2, 1.4 )
+position = Vector2( -8, 6 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 vframes = 9
 hframes = 7
-frame = 7
+frame = 14
 region_rect = Rect2( 0, 0, 130, 130 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

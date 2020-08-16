@@ -5,6 +5,9 @@ var pos_sel = default_sel
 
 export(int) var num_column = 5
 export(int) var num_row = 2
+export(int) var chest_tile = 7
+export(Vector2) var mouse_clicker =  Vector2(50, 40)
+export(Vector2) var mouse_offset = Vector2(0, 0)
 
 var mObjects=[]
 
@@ -22,8 +25,8 @@ var originChest = false
 
 const Item = preload('res://Item.gd')
 
-var hand_open = load("res://gfx_src/hand_open.svg")
-var hand_close = load("res://gfx_src/hand_close.svg")
+var hand_open = load("res://gfx_src/hand_open.png")
+var hand_close = load("res://gfx_src/hand_close.png")
 
 var chest = null setget setChest
 
@@ -40,7 +43,7 @@ func create_chest_background():
 	if mTileMap and chest!=null:
 		for row in range(chest.num_row):
 			for col in range(chest.num_column):
-				mTileMap.set_cell(chest.tileStart.x + col, chest.tileStart.y + row, 7)
+				mTileMap.set_cell(chest.tileStart.x + col, chest.tileStart.y + row, chest_tile)
 
 func setChest(newchest):
 	chest = newchest
@@ -49,13 +52,15 @@ func setChest(newchest):
 func update_drafting_sprite(i:int, object):
 	if i < object.mObjects.size():
 		if object.mObjects[i] != null:
+			mItemSprite.position = get_local_mouse_position() - Vector2(600, 500)
+			mItemSprite.visible = true
 			mItemSprite.index = object.mObjects[i].id
 		else:
-			mItemSprite.index = 0
+			reset_drafting_sprite()
 			
 func reset_drafting_sprite():
 	mItemSprite.index = 0
-	mItemSprite.global_position = Vector2(273, -175)
+	mItemSprite.visible = false
 
 func move_sprite_on_sel(i:int):
 	mSelection.position.x =250+i%num_column*(100)
@@ -91,7 +96,7 @@ func update_items_sprites():
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	Input.set_custom_mouse_cursor(hand_open, Input.CURSOR_ARROW, Vector2(14, 16))
+	Input.set_custom_mouse_cursor(hand_open, Input.CURSOR_ARROW, mouse_clicker)
 	pos_sel = default_sel
 	move_sprite_on_sel(pos_sel)
 	update_items_sprites()
@@ -119,10 +124,9 @@ func start_drag_sprite(pos):
 		draggingObj = null
 		reset_drafting_sprite()
 
-	var tmp = (pos - mItemMap.position) + Vector2(100,100)*mItemMap.cell_size
-	tmp = tmp/mItemMap.cell_size
-	var ix:int = tmp.x - 100
-	var iy:int = tmp.y - 100
+	var tmp = mouse_to_mItemMap_relative(pos)
+	var ix:int = tmp.x
+	var iy:int = tmp.y
 	if is_inside_inventory(ix, iy, self):
 		pos_sel = (ix-tileStart.x) + (iy-tileStart.y)*num_column
 		originChest = false
@@ -134,10 +138,9 @@ func start_drag_sprite(pos):
 			update_items_sprites()
 		elif pos_sel < mObjects.size():
 			dragging = true
-			Input.set_custom_mouse_cursor(hand_close, Input.CURSOR_ARROW, Vector2(14, 16))
+			Input.set_custom_mouse_cursor(hand_close, Input.CURSOR_ARROW, mouse_clicker)
 			originalPos = pos_sel
 			update_drafting_sprite(pos_sel, self)
-			mItemSprite.position = get_local_mouse_position() - Vector2(600, 500)
 			draggingObj = mObjects[pos_sel]
 			mObjects[pos_sel] = null
 			update_items_sprites()
@@ -152,10 +155,9 @@ func start_drag_sprite(pos):
 			update_items_sprites()
 		elif pos_sel < chest.mObjects.size():
 			dragging = true
-			Input.set_custom_mouse_cursor(hand_close, Input.CURSOR_ARROW, Vector2(14, 16))
+			Input.set_custom_mouse_cursor(hand_close, Input.CURSOR_ARROW, mouse_clicker)
 			originalPos = pos_sel
-			update_drafting_sprite(pos_sel, chest) # TODO
-			mItemSprite.position = get_local_mouse_position() - Vector2(600, 500)
+			update_drafting_sprite(pos_sel, chest)
 			draggingObj = chest.mObjects[pos_sel]
 			chest.setItem(originalPos,null)
 			update_items_sprites()
@@ -166,17 +168,21 @@ func start_drag_sprite(pos):
 		reset_drafting_sprite()
 		update_items_sprites()
 		return
+		
+func mouse_to_mItemMap_relative(pos):
+	var tmp = (pos - mItemMap.position)/mItemMap.scale + Vector2(100,100)*mItemMap.cell_size
+	tmp = tmp/mItemMap.cell_size
+	return tmp - Vector2(100, 100)
 
 func end_drag_sprite(pos):
 	reset_drafting_sprite()
 	if not dragging:
 		return
 	dragging = false
-	Input.set_custom_mouse_cursor(hand_open, Input.CURSOR_ARROW, Vector2(14, 16))
-	var tmp = (pos - mItemMap.position) + Vector2(100,100)*mItemMap.cell_size
-	tmp = tmp/mItemMap.cell_size
-	var ix:int = tmp.x - 100
-	var iy:int = tmp.y - 100
+	Input.set_custom_mouse_cursor(hand_open, Input.CURSOR_ARROW, mouse_clicker)
+	var tmp = mouse_to_mItemMap_relative(pos)
+	var ix:int = tmp.x
+	var iy:int = tmp.y
 	
 	if is_inside_inventory(ix, iy, self): # valid coordinates ?
 		var pos_sel_bis = (ix-tileStart.x) + (iy-tileStart.y)*num_column
@@ -245,14 +251,15 @@ func end_drag_sprite(pos):
 
 func follow_mouse(event):
 	if dragging and draggingObj != null:
+		mItemSprite.visible = true
 		mItemSprite.position = event.position - Vector2(600, 500)
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			start_drag_sprite(event.position)
+			start_drag_sprite(event.position-mouse_offset)
 		elif event.button_index == BUTTON_LEFT and not event.pressed:
-			end_drag_sprite(event.position)
+			end_drag_sprite(event.position-mouse_offset)
 	if event is InputEventMouseMotion:
 		follow_mouse(event)
 
@@ -262,25 +269,21 @@ func _input(event):
 		if pos_sel > 0:
 			pos_sel -= 1
 			move_sprite_on_sel(pos_sel)
-			update_drafting_sprite(pos_sel, self)
 	elif event.is_action_pressed("ui_right"):
 		accept_event()
 		if pos_sel < num_column*num_row-1:
 			pos_sel += 1
 			move_sprite_on_sel(pos_sel)
-			update_drafting_sprite(pos_sel, self)
 	elif event.is_action_pressed("ui_up"):
 		accept_event()
 		if pos_sel >= num_column:
 			pos_sel -= num_column
 			move_sprite_on_sel(pos_sel)
-			update_drafting_sprite(pos_sel, self)
 	elif event.is_action_pressed("ui_down"):
 		accept_event()
 		if pos_sel < num_column*(num_row-1):
 			pos_sel += num_column
 			move_sprite_on_sel(pos_sel)
-			update_drafting_sprite(pos_sel, self)
 
 func setInventoryList(list):
 	mObjects = list

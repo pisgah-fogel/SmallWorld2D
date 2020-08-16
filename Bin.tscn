@@ -14,10 +14,11 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -32 )
+position = Vector2( -3.36359, -57.2269 )
+scale = Vector2( 0.760149, 0.793184 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 200, 402, 102, 102 )
+region_rect = Rect2( 397.159, 803.261, 198.507, 208.074 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )

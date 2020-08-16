@@ -21,7 +21,7 @@ onready var mAnimation = $AnimationPlayer
 onready var mSprite = $FishSprite
 
 export(int) var default_y = 0
-export(int) var tortle_y = 90*6
+export(int) var tortle_y = 188*6
 
 export(Rect2) var spawner_zone = Rect2(-100,-100,100,100)
 

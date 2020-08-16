@@ -13,7 +13,6 @@
 - Correct Water texture (white line)
 - Add texture to bin's inventory tile(s)
 - Add textures to shop's inventory tiles
-- Improve player movements & animation
 - Mobs
 - Attack Mobs
 - Insects
@@ -21,9 +20,17 @@
 - Chicken
 - Chicken animation
 - Teleport to an other scene
+- User 45 degrees animations (4 required)
+- User animations when have a collision
+- NPC can interract with shop and enter houses
 
 # To test
 - Bigger inventory/shops/bin/chest...
 - Is saving system reliable ?
+
+# Long term
+- Market prices changes over time and resources availabilities
+
 # Ideas:
 - Scrollable Chest ?
+- User's 22.5 degrees animations ? (8 required)

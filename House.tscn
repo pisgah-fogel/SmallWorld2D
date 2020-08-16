@@ -13,11 +13,11 @@ extents = Vector2( 15.8293, 6.1054 )
 script = ExtResource( 2 )
 
 [node name="Overworld" type="Sprite" parent="."]
-position = Vector2( 8.1706, -80.6642 )
-scale = Vector2( 0.895096, 0.776686 )
+position = Vector2( 4.60297, -104.448 )
+scale = Vector2( 0.47729, 0.474774 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 304.581, 0, 393.854, 300 )
+region_rect = Rect2( 636.209, -25.8472, 705.829, 656.496 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 8.2865, -1.6059 )

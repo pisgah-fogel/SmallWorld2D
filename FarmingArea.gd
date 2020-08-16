@@ -1,9 +1,6 @@
 extends Area2D
 
-export(Vector2) var pos_nothing = Vector2(0, 720)
-export(Vector2) var pos_green = Vector2(90*3, 720)
-export(Vector2) var pos_yellow = Vector2(90*3, 720+1*90)
-export(Vector2) var pos_red = Vector2(90*3, 720+2*90)
+export(int) var first_sprite_y = 7
 
 var farmKind = 0
 
@@ -16,13 +13,17 @@ var mItem = null
 func update_sprite():
 	match farmKind:
 		Item._id.ID_GRASS:
-			sprite.region_rect = Rect2(pos_nothing, sprite.region_rect.size)
+			sprite.region_rect = Rect2(Vector2(0,first_sprite_y*sprite.region_rect.size.y), sprite.region_rect.size)
+			sprite.frame = 0
 		Item._id.ID_GRASS2:
-			sprite.region_rect = Rect2(pos_green, sprite.region_rect.size)
+			sprite.region_rect = Rect2(Vector2(0,(first_sprite_y+1)*sprite.region_rect.size.y), sprite.region_rect.size)
+			sprite.frame = 3
 		Item._id.ID_GRASS3:
-			sprite.region_rect = Rect2(pos_yellow, sprite.region_rect.size)
+			sprite.region_rect = Rect2(Vector2(0,(first_sprite_y+2)*sprite.region_rect.size.y), sprite.region_rect.size)
+			sprite.frame = 3
 		Item._id.ID_GRASS4:
-			sprite.region_rect = Rect2(pos_red, sprite.region_rect.size)
+			sprite.region_rect = Rect2(Vector2(0,(first_sprite_y+3)*sprite.region_rect.size.y), sprite.region_rect.size)
+			sprite.frame = 3
 
 func _ready():
 	farmKind = Item._id.ID_GRASS
