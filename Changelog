@@ -1,4 +1,6 @@
 [2020-08-14]
+- Update graphics
+- Correct character's movements
 - Shopping
 - Character's money
 - Saving
@@ -6,3 +8,7 @@
 - Bin
 - Chest
 - Fishing (Blue fish or Turtle)
+
+# Questions
+- Is the inventory drag and drop good ?
+- Is Joystick support ok ?
