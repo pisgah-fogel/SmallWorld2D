@@ -1,4 +1,5 @@
 [2020-08-14]
+- Help popup for commands
 - Update graphics
 - Correct character's movements
 - Shopping
@@ -10,5 +11,7 @@
 - Fishing (Blue fish or Turtle)
 
 # Questions
+- Is help weird ? (pop-up after 7 seconds)
+- How does the game looks like full screens/ with every size of screens ?
 - Is the inventory drag and drop good ?
 - Is Joystick support ok ?

@@ -1,18 +1,27 @@
 # WIP
 - Update Graphics
+- NPC dialogs & exchange
+	- Data format for dialogs
+	- Dialogs box that we can instanciate
+	- Store dialogs in NPC (+trigger them)
+- Improve inventory (handle N inventories...)
+- Print prices in Shops (and total)
+- Equip a tool in order to use it (only 4 directions arrows + 2 buttons)
 
 # Place Holders
 - Enter house
-- NPC dialogs & exchange
 
 # To plan
+- Drops pops in the Scene (one time, everyday, 10min...)
+- Item drop on the map
+- Plan trees
+- Collect fruits on trees
+- Cut trees
+- Resize UI (Inventory, help and dialogs according to screen size)
 - Add specialized shop (add items when we buy them)
 - Display prices in Shops
 - Draw hills and nice montains
-- Correct Grass texture (red line)
 - Correct Water texture (white line)
-- Add texture to bin's inventory tile(s)
-- Add textures to shop's inventory tiles
 - Mobs
 - Attack Mobs
 - Insects
@@ -45,8 +54,10 @@
 - Fishes check for water before moving ? (move far from the spawn ?)
 - Character's animation when turning
 - Reddish shared for sunset
+- Do we want to save dropped items ?
 
 # To Do before 'shipping'
+- Make the help popup appears smoothly
 - Make fishing more difficult
 - Redesign map
 - make plants grow slower
