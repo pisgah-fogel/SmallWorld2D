@@ -26,6 +26,8 @@ var bait_notInWater = false
 var newFish = null
 var mDirection = Direction.DOWN
 
+onready var mHelp = $Help
+onready var mTimer = $Timer
 
 class Wallet:
 	var money:int = 0
@@ -84,7 +86,13 @@ func updateUserControl(event):
 	userControl.x = right_strength - left_strength
 	userControl.y = down_strength - up_strength
 
+func _on_Timer_timeout():
+	if state == MOVE:
+		mHelp.visible = true
+
 func _unhandled_key_input(event):
+	mTimer.start(7)
+	mHelp.visible = false
 	match state:
 		MOVE:
 			if event.is_action_pressed("ui_action"):
