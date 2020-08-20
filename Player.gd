@@ -88,11 +88,11 @@ func updateUserControl(event):
 
 func _on_Timer_timeout():
 	if state == MOVE:
-		mHelp.visible = true
+		mHelp._appears()
 
 func _unhandled_key_input(event):
 	mTimer.start(7)
-	mHelp.visible = false
+	mHelp._disappears()
 	match state:
 		MOVE:
 			if event.is_action_pressed("ui_action"):
