@@ -7,7 +7,6 @@ onready var mDialogs = $Dialogs
 export(int) var water_tile = 4
 
 func _ready():
-	mDialogs.popup_centered_clamped()
 	mGameSaver.load(0)
 	randomize()
 
