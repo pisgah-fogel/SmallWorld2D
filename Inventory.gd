@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 export(int) var default_sel = 0
 var pos_sel = default_sel
@@ -13,11 +13,12 @@ export(Vector2) var mouse_offset = Vector2(0, 0)
 
 var mObjects=[]
 
-onready var mSelection = $selection
-onready var mItemMap = $ItemMap
-onready var mItemSprite = $ItemSprite
-onready var mTileMap = $TileMap
-onready var mGoldLabel = $GoldLabel
+onready var mSelection = $Control/selection
+onready var mItemMap = $Control/ItemMap
+onready var mItemSprite = $Control/ItemSprite
+onready var mTileMap = $Control/TileMap
+onready var mGoldLabel = $Control/GoldLabel
+onready var mControl = $Control
 
 var tileStart = Vector2(0, 0)
 var dragging = false
@@ -58,7 +59,7 @@ func setChest(newchest):
 func update_drafting_sprite(i:int, object):
 	if i < object.mObjects.size():
 		if object.mObjects[i] != null:
-			mItemSprite.position = get_local_mouse_position() - Vector2(600, 500)
+			mItemSprite.position = mControl.get_local_mouse_position() - Vector2(600, 500)
 			mItemSprite.visible = true
 			mItemSprite.index = object.mObjects[i].id
 		else:
@@ -109,6 +110,14 @@ func _ready():
 	create_chest_background()
 	if userWallet != null:
 		mGoldLabel.text = str(userWallet.money)
+	get_tree().get_root().connect("size_changed", self, "_size_changed")
+
+func update_placing():
+	offset.y = mControl.get_viewport_rect().size.y-600
+	offset.x = mControl.get_viewport_rect().size.x/2-500
+
+func _size_changed():
+	update_placing()
 
 func is_inside_inventory(ix, iy, object):
 	var minx = object.tileStart.x
@@ -260,33 +269,34 @@ func follow_mouse(event):
 		mItemSprite.visible = true
 		mItemSprite.position = event.position - Vector2(600, 500)
 
-func _gui_input(event):
+func _input(event):
 	if event is InputEventMouseButton:
+		get_tree().set_input_as_handled()
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			start_drag_sprite(event.position-mouse_offset)
 		elif event.button_index == BUTTON_LEFT and not event.pressed:
 			end_drag_sprite(event.position-mouse_offset)
 	if event is InputEventMouseMotion:
 		follow_mouse(event)
-
-func _input(event):
+		get_tree().set_input_as_handled()
+		
 	if event.is_action_pressed("ui_left"):
-		accept_event()
+		get_tree().set_input_as_handled()
 		if pos_sel > 0:
 			pos_sel -= 1
 			move_sprite_on_sel(pos_sel)
 	elif event.is_action_pressed("ui_right"):
-		accept_event()
+		get_tree().set_input_as_handled()
 		if pos_sel < num_column*num_row-1:
 			pos_sel += 1
 			move_sprite_on_sel(pos_sel)
 	elif event.is_action_pressed("ui_up"):
-		accept_event()
+		get_tree().set_input_as_handled()
 		if pos_sel >= num_column:
 			pos_sel -= num_column
 			move_sprite_on_sel(pos_sel)
 	elif event.is_action_pressed("ui_down"):
-		accept_event()
+		get_tree().set_input_as_handled()
 		if pos_sel < num_column*(num_row-1):
 			pos_sel += num_column
 			move_sprite_on_sel(pos_sel)
