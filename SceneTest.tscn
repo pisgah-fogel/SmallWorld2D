@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://House.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Bin.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Chest.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Shop.tscn" type="PackedScene" id=11]
+[ext_resource path="res://gfx_src/dialogs.png" type="Texture" id=12]
+[ext_resource path="res://Dialogs.gd" type="Script" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 200, 0, 200, 200, 0, 200 )
@@ -308,3 +310,25 @@ position = Vector2( 921, 46 )
 
 [node name="Shop" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 1117.57, 48.0833 )
+
+[node name="Dialogs" type="Popup" parent="."]
+margin_left = -268.303
+margin_top = 1.33484
+margin_right = -228.303
+margin_bottom = 41.3348
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Dialogs"]
+
+[node name="TextureRect" type="TextureRect" parent="Dialogs/CanvasLayer"]
+margin_left = 1.33487
+margin_top = 312.353
+margin_right = 1001.33
+margin_bottom = 612.353
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
